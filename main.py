@@ -6,6 +6,7 @@ c = Canvas(tk, width=1040, height=640, bg='white')
 c.pack()
 
 asteroid_list = []
+player = c.create_rectangle(300, 300, 340, 340, fill='red')
 
 def create_asteroid():
     colors = ['blue', 'green', 'purple']
@@ -44,6 +45,21 @@ def move_all_asteroids():
         c.move(asteroid_data, vx, vy)
 
     c.after(50, move_all_asteroids)
+
+def move_player(key):
+    if key.char == 'a':
+        c.move(player, -40, 0)
+
+    if key.char == 'd':
+        c.move(player, 40, 0)
+
+    if key.char == 'w':
+        c.move(player, 0, -40)
+
+    if key.char == 's':
+        c.move(player, 0, 40)
+
+tk.bind('<KeyPress>', move_player)
 
 create_asteroid()
 
